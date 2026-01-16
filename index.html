@@ -20,10 +20,10 @@
         body { font-family: 'Lato', sans-serif; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
         
-        /* Simulating the fixed background effect often seen on luxury sites */
         /* Dynamic CSS Variable for Hero Image to allow JS Fallback */
         :root {
-            --hero-image: url('https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/slider/1.jpg');
+            /* Tying 'master' branch which is common for older repos */
+            --hero-image: url('https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/slider/1.jpg');
         }
 
         .hero-bg {
@@ -96,9 +96,9 @@
                 
                 <!-- Branding -->
                 <div class="flex items-center gap-5 group cursor-pointer">
-                    <!-- Updated to use GitHub Raw Content -->
+                    <!-- Updated to use GitHub Raw Content with MASTER branch -->
                     <img 
-                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/STHS-Logo.png" 
+                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/STHS-Logo.png" 
                         alt="Santhome Logo" 
                         class="h-16 lg:h-20 w-auto object-contain drop-shadow-sm"
                         onerror="this.style.display='none'; document.getElementById('header-logo-fallback').classList.remove('hidden');"
@@ -159,7 +159,7 @@
                                 <!-- Column 4: Image/Feature -->
                                 <div class="bg-slate-50 p-4 border border-slate-100 text-center">
                                     <img 
-                                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/students.jpg" 
+                                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/student-council.jpg" 
                                         class="w-full h-32 object-cover mb-3 grayscale hover:grayscale-0 transition"
                                         onerror="this.src='https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'"
                                     >
@@ -251,7 +251,7 @@
                                 </div>
                                 <div class="bg-blue-50 p-4 border border-blue-100 text-center">
                                     <img 
-                                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/virtual-tour.jpg" 
+                                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/infrastructure.jpg" 
                                         class="w-full h-32 object-cover mb-3 grayscale hover:grayscale-0 transition"
                                         onerror="this.src='https://images.unsplash.com/photo-1577896334614-201b31d50863?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'"
                                     >
@@ -433,7 +433,7 @@
                 <div class="relative">
                     <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-yellow-600 z-0"></div>
                     <img 
-                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/about.jpg" 
+                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/about.jpg" 
                         alt="School Campus" 
                         class="relative z-10 shadow-2xl grayscale hover:grayscale-0 transition duration-700 ease-in-out w-full object-cover h-[500px]"
                         onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'"
@@ -510,7 +510,7 @@
                     <div class="grid sm:grid-cols-2 gap-6">
                         <a href="#" class="group relative overflow-hidden h-64 bg-slate-900 flex items-end p-6">
                             <img 
-                                src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/calendar.jpg"
+                                src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/calendar.jpg"
                                 class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-30 transition transform group-hover:scale-105 duration-700"
                                 onerror="this.src='https://images.unsplash.com/photo-1506784983877-45594efa4cbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'"
                             >
@@ -525,7 +525,7 @@
 
                         <a href="#" class="group relative overflow-hidden h-64 bg-slate-900 flex items-end p-6">
                             <img 
-                                src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/library.jpg"
+                                src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/library.jpg"
                                 class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-30 transition transform group-hover:scale-105 duration-700"
                                 onerror="this.src='https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'"
                             >
@@ -738,7 +738,7 @@
                     <div class="flex items-center gap-3 mb-6">
                          <!-- Footer Logo Logic -->
                         <img 
-                            src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/STHS-Logo.png" 
+                            src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/STHS-Logo.png" 
                             alt="Santhome Logo" 
                             class="h-14 w-auto bg-white p-1 rounded-full shadow-lg"
                             onerror="this.style.display='none'; document.getElementById('footer-logo-fallback').classList.remove('hidden');"
@@ -879,7 +879,7 @@
         // Dynamic Hero Image Fallback Script
         // This ensures that if the GitHub image fails (404), we revert to Unsplash for the CSS background
         const heroImage = new Image();
-        heroImage.src = 'https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/slider/1.jpg';
+        heroImage.src = 'https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/slider/1.jpg';
         heroImage.onerror = function() {
             document.documentElement.style.setProperty('--hero-image', "url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')");
         };
