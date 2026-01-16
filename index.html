@@ -20,10 +20,9 @@
         body { font-family: 'Lato', sans-serif; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
         
-        /* Dynamic CSS Variable for Hero Image to allow JS Fallback */
+        /* Default Hero Image - Will be updated by JS if broken */
         :root {
-            /* Tying 'master' branch which is common for older repos */
-            --hero-image: url('https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/slider/1.jpg');
+            --hero-image: url('https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/slider/1.jpg');
         }
 
         .hero-bg {
@@ -52,6 +51,46 @@
             .no-print { display: none; }
         }
     </style>
+
+    <!-- ROBUST IMAGE LOADER SCRIPT -->
+    <script>
+        /**
+         * Smart Image Handler
+         * 1. Tries loading from 'main' branch (default).
+         * 2. If fails, retries with 'master' branch.
+         * 3. If both fail, shows fallback UI (icon or Unsplash).
+         */
+        function handleImageError(img, fallbackIdOrUrl) {
+            const currentSrc = img.src;
+            
+            // 1. Check if we have already tried switching branches
+            if (!img.getAttribute('data-retried')) {
+                img.setAttribute('data-retried', 'true');
+                
+                // Switch branch logic
+                if (currentSrc.includes('/main/')) {
+                    img.src = currentSrc.replace('/main/', '/master/');
+                    console.log('Retrying image with master branch:', img.src);
+                    return;
+                } else if (currentSrc.includes('/master/')) {
+                    img.src = currentSrc.replace('/master/', '/main/');
+                    console.log('Retrying image with main branch:', img.src);
+                    return;
+                }
+            }
+
+            // 2. If we reach here, both branches failed. Show fallback.
+            if (fallbackIdOrUrl.startsWith('http')) {
+                // It's a URL fallback (like Unsplash)
+                img.src = fallbackIdOrUrl;
+            } else {
+                // It's a DOM ID fallback (like the shield icon)
+                img.style.display = 'none';
+                const fallbackEl = document.getElementById(fallbackIdOrUrl);
+                if (fallbackEl) fallbackEl.classList.remove('hidden');
+            }
+        }
+    </script>
 </head>
 <body class="bg-white text-slate-700 antialiased">
 
@@ -96,12 +135,12 @@
                 
                 <!-- Branding -->
                 <div class="flex items-center gap-5 group cursor-pointer">
-                    <!-- Updated to use GitHub Raw Content with MASTER branch -->
+                    <!-- LOGO: Uses 'main' branch first, auto-retries 'master', falls back to icon -->
                     <img 
-                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/STHS-Logo.png" 
+                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/STHS-Logo.png" 
                         alt="Santhome Logo" 
                         class="h-16 lg:h-20 w-auto object-contain drop-shadow-sm"
-                        onerror="this.style.display='none'; document.getElementById('header-logo-fallback').classList.remove('hidden');"
+                        onerror="handleImageError(this, 'header-logo-fallback')"
                     >
                     <div id="header-logo-fallback" class="hidden h-16 w-16 bg-slate-900 rounded-full flex items-center justify-center border-2 border-yellow-600 shadow-lg">
                         <i class="fas fa-graduation-cap text-3xl text-yellow-500"></i>
@@ -159,9 +198,9 @@
                                 <!-- Column 4: Image/Feature -->
                                 <div class="bg-slate-50 p-4 border border-slate-100 text-center">
                                     <img 
-                                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/student-council.jpg" 
+                                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/student-council.jpg" 
                                         class="w-full h-32 object-cover mb-3 grayscale hover:grayscale-0 transition"
-                                        onerror="this.src='https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'"
+                                        onerror="handleImageError(this, 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80')"
                                     >
                                     <h5 class="font-serif text-slate-900">Education for Life</h5>
                                     <p class="text-xs text-slate-500 mt-1">Nurturing values since 1982.</p>
@@ -251,9 +290,9 @@
                                 </div>
                                 <div class="bg-blue-50 p-4 border border-blue-100 text-center">
                                     <img 
-                                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/infrastructure.jpg" 
+                                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/infrastructure.jpg" 
                                         class="w-full h-32 object-cover mb-3 grayscale hover:grayscale-0 transition"
-                                        onerror="this.src='https://images.unsplash.com/photo-1577896334614-201b31d50863?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'"
+                                        onerror="handleImageError(this, 'https://images.unsplash.com/photo-1577896334614-201b31d50863?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80')"
                                     >
                                     <h5 class="font-serif text-slate-900">Virtual Tour</h5>
                                     <p class="text-xs text-slate-500 mt-1 mb-3">Explore our campus from home.</p>
@@ -433,10 +472,10 @@
                 <div class="relative">
                     <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-yellow-600 z-0"></div>
                     <img 
-                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/about.jpg" 
+                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/School-img.png" 
                         alt="School Campus" 
                         class="relative z-10 shadow-2xl grayscale hover:grayscale-0 transition duration-700 ease-in-out w-full object-cover h-[500px]"
-                        onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'"
+                        onerror="handleImageError(this, 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')"
                     >
                     <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-slate-900 z-0"></div>
                 </div>
@@ -480,6 +519,20 @@
                     <h3 class="text-2xl font-bold text-slate-900 mb-8 pb-4 border-b border-slate-200">
                         Latest Updates
                     </h3>
+
+                    <!-- NEW: Toppers Badge Widget -->
+                    <div class="bg-yellow-50 p-6 border border-yellow-200 text-center rounded-sm mb-8 shadow-sm">
+                        <img 
+                            src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Toppers-badge.png" 
+                            class="h-28 mx-auto mb-4 drop-shadow-md hover:scale-105 transition duration-300" 
+                            alt="Toppers Badge"
+                            onerror="this.style.display='none'"
+                        >
+                        <h4 class="font-serif font-bold text-lg text-slate-900 mb-1">Hall of Fame</h4>
+                        <p class="text-xs text-slate-600 mb-3 leading-relaxed">Celebrating our meritorious students in CBSE Board Exams.</p>
+                        <a href="#" class="inline-block bg-yellow-600 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-2 hover:bg-yellow-700 transition">View Toppers List</a>
+                    </div>
+
                     <div class="space-y-6">
                         <!-- News Item 1 -->
                         <div class="group bg-white p-6 shadow-sm hover:shadow-md transition border-l-4 border-yellow-600">
@@ -510,9 +563,9 @@
                     <div class="grid sm:grid-cols-2 gap-6">
                         <a href="#" class="group relative overflow-hidden h-64 bg-slate-900 flex items-end p-6">
                             <img 
-                                src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/calendar.jpg"
+                                src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/calendar.jpg"
                                 class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-30 transition transform group-hover:scale-105 duration-700"
-                                onerror="this.src='https://images.unsplash.com/photo-1506784983877-45594efa4cbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'"
+                                onerror="handleImageError(this, 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"
                             >
                             <div class="relative z-10">
                                 <div class="w-10 h-10 bg-yellow-600 text-white flex items-center justify-center mb-3">
@@ -525,9 +578,9 @@
 
                         <a href="#" class="group relative overflow-hidden h-64 bg-slate-900 flex items-end p-6">
                             <img 
-                                src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/library.jpg"
+                                src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/library.jpg"
                                 class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-30 transition transform group-hover:scale-105 duration-700"
-                                onerror="this.src='https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'"
+                                onerror="handleImageError(this, 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"
                             >
                             <div class="relative z-10">
                                 <div class="w-10 h-10 bg-slate-700 text-white flex items-center justify-center mb-3">
@@ -738,10 +791,10 @@
                     <div class="flex items-center gap-3 mb-6">
                          <!-- Footer Logo Logic -->
                         <img 
-                            src="https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/STHS-Logo.png" 
+                            src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/STHS-Logo.png" 
                             alt="Santhome Logo" 
                             class="h-14 w-auto bg-white p-1 rounded-full shadow-lg"
-                            onerror="this.style.display='none'; document.getElementById('footer-logo-fallback').classList.remove('hidden');"
+                            onerror="handleImageError(this, 'footer-logo-fallback')"
                         >
                         <!-- Fallback Icon for Footer -->
                         <div id="footer-logo-fallback" class="hidden h-12 w-12 bg-slate-800 rounded-full flex items-center justify-center border border-yellow-600">
@@ -876,13 +929,38 @@
             });
         });
 
-        // Dynamic Hero Image Fallback Script
-        // This ensures that if the GitHub image fails (404), we revert to Unsplash for the CSS background
-        const heroImage = new Image();
-        heroImage.src = 'https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/slider/1.jpg';
-        heroImage.onerror = function() {
-            document.documentElement.style.setProperty('--hero-image', "url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')");
-        };
+        // Dynamic Hero Image Fallback Script for CSS Variable
+        // This ensures the CSS background also benefits from the retry logic
+        function checkAndSetHeroImage() {
+            const img = new Image();
+            const mainUrl = 'https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/slider/1.jpg';
+            const masterUrl = 'https://raw.githubusercontent.com/rudhm/santhomeschool/master/Frontend/images/slider/1.jpg';
+            const fallbackUrl = 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80';
+
+            img.onload = function() {
+                // Main worked
+                document.documentElement.style.setProperty('--hero-image', `url('${mainUrl}')`);
+            };
+
+            img.onerror = function() {
+                // Main failed, try master
+                const img2 = new Image();
+                img2.onload = function() {
+                    document.documentElement.style.setProperty('--hero-image', `url('${masterUrl}')`);
+                    console.log('Hero image loaded from master');
+                };
+                img2.onerror = function() {
+                    document.documentElement.style.setProperty('--hero-image', `url('${fallbackUrl}')`);
+                    console.log('Hero image loaded from Unsplash fallback');
+                };
+                img2.src = masterUrl;
+            };
+
+            img.src = mainUrl;
+        }
+
+        // Initialize Hero Image Check
+        checkAndSetHeroImage();
     </script>
 </body>
 </html>
