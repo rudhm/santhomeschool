@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santhome Higher Secondary School, Maihar | CBSE Affiliated</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Playfair Display for Heritage/Prestige, Lato for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Lato', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        
+        /* Simulating the fixed background effect often seen on luxury sites */
+        /* Dynamic CSS Variable for Hero Image to allow JS Fallback */
+        :root {
+            --hero-image: url('https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/slider/1.jpg');
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(30, 41, 59, 0.7), rgba(30, 41, 59, 0.6)), var(--hero-image);
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .facility-card:hover .facility-icon {
+            transform: scale(1.1);
+        }
+
+        /* Mobile Menu Accordion Styles */
+        .mobile-submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .mobile-submenu.open {
+            max-height: 500px; /* Arbitrary large height */
+        }
+        
+        @media print {
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-700 antialiased">
+
+    <!-- HEADER: JNS Style - Stacked, Clean, Prestige -->
+    <header class="fixed w-full z-50 bg-white shadow-md transition-all duration-300 font-sans">
+        
+        <!-- TOP UTILITY BAR -->
+        <div class="bg-slate-900 text-slate-400 text-[11px] font-bold uppercase tracking-widest py-2.5 px-6 hidden lg:block border-b border-slate-800">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <!-- Left: Contact & Code -->
+                <div class="flex items-center space-x-6">
+                    <span class="text-slate-300">CBSE Affiliation: 1031039</span>
+                    <span class="w-px h-3 bg-slate-700"></span>
+                    <a href="tel:07674232453" class="hover:text-white transition flex items-center gap-2">
+                        <i class="fas fa-phone-alt text-yellow-600"></i> 07674 – 232453
+                    </a>
+                </div>
+
+                <!-- Right: Utility Links & Socials -->
+                <div class="flex items-center gap-6">
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-white transition">Alumni</a>
+                        <a href="#" class="hover:text-white transition">Careers</a>
+                        <a href="#" class="hover:text-white transition">Parent Portal</a>
+                    </div>
+                    <span class="w-px h-3 bg-slate-700"></span>
+                    <div class="flex space-x-3">
+                        <a href="#" class="hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <!-- JNS Style 'Admissions' Button in Top Bar -->
+                    <a href="#contact" class="bg-yellow-600 text-white px-4 py-1 hover:bg-yellow-700 transition shadow-sm ml-2">
+                        Admissions Open
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN NAVIGATION CONTAINER -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="flex justify-between items-center h-24 lg:h-28">
+                
+                <!-- Branding -->
+                <div class="flex items-center gap-5 group cursor-pointer">
+                    <!-- Updated to use GitHub Raw Content -->
+                    <img 
+                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/STHS-Logo.png" 
+                        alt="Santhome Logo" 
+                        class="h-16 lg:h-20 w-auto object-contain drop-shadow-sm"
+                        onerror="this.style.display='none'; document.getElementById('header-logo-fallback').classList.remove('hidden');"
+                    >
+                    <div id="header-logo-fallback" class="hidden h-16 w-16 bg-slate-900 rounded-full flex items-center justify-center border-2 border-yellow-600 shadow-lg">
+                        <i class="fas fa-graduation-cap text-3xl text-yellow-500"></i>
+                    </div>
+
+                    <div class="flex flex-col justify-center">
+                        <h1 class="text-2xl lg:text-3xl font-serif font-bold text-slate-900 leading-none tracking-tight">Santhome</h1>
+                        <p class="text-[10px] lg:text-xs uppercase tracking-[0.25em] text-slate-500 mt-1.5 font-bold">Higher Secondary School</p>
+                    </div>
+                </div>
+
+                <!-- DESKTOP MEGA MENU NAVIGATION -->
+                <nav class="hidden lg:flex items-center gap-8 text-[13px] font-bold uppercase tracking-[0.15em] text-slate-800 h-full">
+                    
+                    <a href="#home" class="hover:text-yellow-600 transition">Home</a>
+
+                    <!-- MEGA MENU 1: ABOUT US -->
+                    <div class="group static h-full flex items-center">
+                        <a href="#about" class="cursor-pointer group-hover:text-yellow-600 transition py-8 relative">
+                            About Us
+                            <span class="absolute bottom-6 left-0 w-0 h-0.5 bg-yellow-600 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <!-- Mega Dropdown -->
+                        <div class="absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50">
+                            <div class="max-w-7xl mx-auto py-10 px-8 grid grid-cols-4 gap-8">
+                                <!-- Column 1 -->
+                                <div>
+                                    <h4 class="text-slate-900 font-serif text-lg mb-4 border-b border-slate-200 pb-2">Overview</h4>
+                                    <ul class="space-y-3 normal-case tracking-normal font-normal text-slate-600 text-sm">
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">School Profile</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">History & Heritage</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Vision & Mission</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Principal's Message</a></li>
+                                    </ul>
+                                </div>
+                                <!-- Column 2 -->
+                                <div>
+                                    <h4 class="text-slate-900 font-serif text-lg mb-4 border-b border-slate-200 pb-2">Administration</h4>
+                                    <ul class="space-y-3 normal-case tracking-normal font-normal text-slate-600 text-sm">
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Management Society</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">School Management Committee</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Our Staff</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Affiliation Details</a></li>
+                                    </ul>
+                                </div>
+                                <!-- Column 3 -->
+                                <div>
+                                    <h4 class="text-slate-900 font-serif text-lg mb-4 border-b border-slate-200 pb-2">Compliance</h4>
+                                    <ul class="space-y-3 normal-case tracking-normal font-normal text-slate-600 text-sm">
+                                        <li><a href="#disclosure" class="hover:text-yellow-600 hover:pl-1 transition-all text-red-600 font-semibold">Mandatory Public Disclosure</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">CBSE Grant Letter</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Society Registration</a></li>
+                                    </ul>
+                                </div>
+                                <!-- Column 4: Image/Feature -->
+                                <div class="bg-slate-50 p-4 border border-slate-100 text-center">
+                                    <img 
+                                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/students.jpg" 
+                                        class="w-full h-32 object-cover mb-3 grayscale hover:grayscale-0 transition"
+                                        onerror="this.src='https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'"
+                                    >
+                                    <h5 class="font-serif text-slate-900">Education for Life</h5>
+                                    <p class="text-xs text-slate-500 mt-1">Nurturing values since 1982.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MEGA MENU 2: ACADEMICS -->
+                    <div class="group static h-full flex items-center">
+                        <a href="#academics" class="cursor-pointer group-hover:text-yellow-600 transition py-8 relative">
+                            Academics
+                            <span class="absolute bottom-6 left-0 w-0 h-0.5 bg-yellow-600 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <div class="absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50">
+                            <div class="max-w-7xl mx-auto py-10 px-8 grid grid-cols-4 gap-8">
+                                <div>
+                                    <h4 class="text-slate-900 font-serif text-lg mb-4 border-b border-slate-200 pb-2">Curriculum</h4>
+                                    <ul class="space-y-3 normal-case tracking-normal font-normal text-slate-600 text-sm">
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Pre-Primary (Kindergarten)</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Primary Wing</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Secondary Wing</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Senior Secondary (XI-XII)</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-slate-900 font-serif text-lg mb-4 border-b border-slate-200 pb-2">Downloads</h4>
+                                    <ul class="space-y-3 normal-case tracking-normal font-normal text-slate-600 text-sm">
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all flex items-center"><i class="fas fa-file-pdf text-red-500 mr-2"></i> Book List 2025-26</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all flex items-center"><i class="fas fa-file-pdf text-red-500 mr-2"></i> Syllabus Breakdown</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all flex items-center"><i class="fas fa-file-pdf text-red-500 mr-2"></i> Annual Curriculum Plan</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all flex items-center"><i class="fas fa-calendar-alt text-blue-500 mr-2"></i> Academic Calendar</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-slate-900 font-serif text-lg mb-4 border-b border-slate-200 pb-2">Examinations</h4>
+                                    <ul class="space-y-3 normal-case tracking-normal font-normal text-slate-600 text-sm">
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Assessment Guidelines</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Date Sheets</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Toppers List</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Result Analysis</a></li>
+                                    </ul>
+                                </div>
+                                <div class="bg-yellow-50 p-4 border border-yellow-100 text-center">
+                                    <div class="text-4xl text-yellow-600 mb-2"><i class="fas fa-book-reader"></i></div>
+                                    <h5 class="font-serif text-slate-900">Transfer Certificate</h5>
+                                    <p class="text-xs text-slate-500 mt-1 mb-3">View and download TCs.</p>
+                                    <a href="#" class="inline-block bg-slate-900 text-white text-xs px-3 py-1 uppercase tracking-widest">Access Portal</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MEGA MENU 3: FACILITIES -->
+                    <div class="group static h-full flex items-center">
+                        <a href="#facilities" class="cursor-pointer group-hover:text-yellow-600 transition py-8 relative">
+                            Infrastructure
+                            <span class="absolute bottom-6 left-0 w-0 h-0.5 bg-yellow-600 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <div class="absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50">
+                            <div class="max-w-7xl mx-auto py-10 px-8 grid grid-cols-4 gap-8">
+                                <div>
+                                    <h4 class="text-slate-900 font-serif text-lg mb-4 border-b border-slate-200 pb-2">Academic Facilities</h4>
+                                    <ul class="space-y-3 normal-case tracking-normal font-normal text-slate-600 text-sm">
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Smart Classrooms</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Library</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Science Laboratories</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Computer Centre</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-slate-900 font-serif text-lg mb-4 border-b border-slate-200 pb-2">Sports & Co-Scholastic</h4>
+                                    <ul class="space-y-3 normal-case tracking-normal font-normal text-slate-600 text-sm">
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Sports Complex</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Auditorium</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Music & Dance Room</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Playground</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-slate-900 font-serif text-lg mb-4 border-b border-slate-200 pb-2">Campus Services</h4>
+                                    <ul class="space-y-3 normal-case tracking-normal font-normal text-slate-600 text-sm">
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Transportation</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Infirmary / Medical</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Safety & Security</a></li>
+                                    </ul>
+                                </div>
+                                <div class="bg-blue-50 p-4 border border-blue-100 text-center">
+                                    <img 
+                                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/virtual-tour.jpg" 
+                                        class="w-full h-32 object-cover mb-3 grayscale hover:grayscale-0 transition"
+                                        onerror="this.src='https://images.unsplash.com/photo-1577896334614-201b31d50863?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'"
+                                    >
+                                    <h5 class="font-serif text-slate-900">Virtual Tour</h5>
+                                    <p class="text-xs text-slate-500 mt-1 mb-3">Explore our campus from home.</p>
+                                    <a href="#" class="inline-block border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white transition text-xs px-3 py-1 uppercase tracking-widest">Start Tour</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MEGA MENU 4: ADMISSIONS -->
+                     <div class="group static h-full flex items-center">
+                        <a href="#contact" class="cursor-pointer group-hover:text-yellow-600 transition py-8 relative">
+                            Admissions
+                            <span class="absolute bottom-6 left-0 w-0 h-0.5 bg-yellow-600 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <div class="absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50">
+                            <div class="max-w-7xl mx-auto py-10 px-8 grid grid-cols-4 gap-8">
+                                <div>
+                                    <h4 class="text-slate-900 font-serif text-lg mb-4 border-b border-slate-200 pb-2">Admission Process</h4>
+                                    <ul class="space-y-3 normal-case tracking-normal font-normal text-slate-600 text-sm">
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Guidelines 2025-26</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Age Criteria</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Online Enquiry Form</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Download Application</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-slate-900 font-serif text-lg mb-4 border-b border-slate-200 pb-2">Fee Matters</h4>
+                                    <ul class="space-y-3 normal-case tracking-normal font-normal text-slate-600 text-sm">
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Fee Structure 2025-26</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Fee Payment Policy</a></li>
+                                        <li><a href="#" class="hover:text-yellow-600 hover:pl-1 transition-all">Online Fee Payment</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-span-2 bg-slate-900 text-white p-6 flex flex-col justify-center items-start">
+                                    <h4 class="font-serif text-xl mb-2">Join Our Family</h4>
+                                    <p class="text-slate-300 text-sm mb-4 max-w-md">Applications are now open for the academic session 2025-26. Give your child the gift of values-based education.</p>
+                                    <a href="#" class="bg-yellow-600 text-white px-5 py-2 text-xs font-bold uppercase tracking-widest hover:bg-yellow-700 transition">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Search Icon (JNS Touch) -->
+                    <button class="text-slate-400 hover:text-yellow-600 transition px-2">
+                        <i class="fas fa-search text-lg"></i>
+                    </button>
+                </nav>
+
+                <!-- Mobile Controls -->
+                <div class="flex items-center gap-4 lg:hidden">
+                    <a href="#contact" class="bg-yellow-600 text-white text-xs font-bold uppercase px-3 py-2 rounded-sm">
+                        Enquire
+                    </a>
+                    <button id="mobile-menu-btn" class="text-slate-900 text-2xl focus:outline-none p-2">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU OVERLAY (Updated with Accordion/Click Logic) -->
+        <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-white pt-24 px-0 lg:hidden h-screen overflow-y-auto">
+            <div class="px-6 pb-20 space-y-2">
+                
+                <!-- Home -->
+                <a href="#home" class="block text-xl font-serif text-slate-900 border-b border-slate-100 py-3">Home</a>
+
+                <!-- About Accordion -->
+                <div>
+                    <button class="w-full flex justify-between items-center text-xl font-serif text-slate-900 border-b border-slate-100 py-3 mobile-accordion-toggle">
+                        About Us <i class="fas fa-chevron-down text-xs text-slate-400"></i>
+                    </button>
+                    <div class="mobile-submenu bg-slate-50">
+                        <a href="#about" class="block px-4 py-2 text-sm text-slate-600 border-b border-slate-100">Overview</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-slate-600 border-b border-slate-100">Vision & Mission</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-slate-600 border-b border-slate-100">Management</a>
+                        <a href="#disclosure" class="block px-4 py-2 text-sm text-red-600 font-semibold border-b border-slate-100">Public Disclosure</a>
+                    </div>
+                </div>
+
+                <!-- Academics Accordion -->
+                <div>
+                    <button class="w-full flex justify-between items-center text-xl font-serif text-slate-900 border-b border-slate-100 py-3 mobile-accordion-toggle">
+                        Academics <i class="fas fa-chevron-down text-xs text-slate-400"></i>
+                    </button>
+                    <div class="mobile-submenu bg-slate-50">
+                        <a href="#academics" class="block px-4 py-2 text-sm text-slate-600 border-b border-slate-100">Curriculum</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-slate-600 border-b border-slate-100">Book List</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-slate-600 border-b border-slate-100">Academic Calendar</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-slate-600 border-b border-slate-100">Transfer Certificates</a>
+                    </div>
+                </div>
+
+                <!-- Infrastructure Accordion -->
+                <div>
+                    <button class="w-full flex justify-between items-center text-xl font-serif text-slate-900 border-b border-slate-100 py-3 mobile-accordion-toggle">
+                        Infrastructure <i class="fas fa-chevron-down text-xs text-slate-400"></i>
+                    </button>
+                    <div class="mobile-submenu bg-slate-50">
+                        <a href="#facilities" class="block px-4 py-2 text-sm text-slate-600 border-b border-slate-100">Facilities Tour</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-slate-600 border-b border-slate-100">Transport</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-slate-600 border-b border-slate-100">Safety</a>
+                    </div>
+                </div>
+
+                <!-- Admissions Accordion -->
+                <div>
+                    <button class="w-full flex justify-between items-center text-xl font-serif text-slate-900 border-b border-slate-100 py-3 mobile-accordion-toggle">
+                        Admissions <i class="fas fa-chevron-down text-xs text-slate-400"></i>
+                    </button>
+                    <div class="mobile-submenu bg-slate-50">
+                        <a href="#contact" class="block px-4 py-2 text-sm text-slate-600 border-b border-slate-100">Process & Guidelines</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-slate-600 border-b border-slate-100">Fee Structure</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-slate-600 border-b border-slate-100">Enquiry Form</a>
+                    </div>
+                </div>
+
+                <a href="#notices" class="block text-xl font-serif text-slate-900 border-b border-slate-100 py-3">Notices</a>
+                <a href="#contact" class="block text-xl font-serif text-slate-900 border-b border-slate-100 py-3">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION: Immersive & Classic -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center hero-bg pt-20">
+        <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto animate-fade-in-up">
+            <div class="mb-6">
+                <span class="inline-block py-1 px-3 border border-yellow-500/50 text-yellow-400 text-xs font-bold uppercase tracking-[0.3em] backdrop-blur-sm bg-black/20">
+                    Est. 1982
+                </span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-lg">
+                <span class="italic font-light">Faith</span> & <span class="italic font-light">Excellence</span><br>
+                in Education
+            </h1>
+            <p class="text-lg md:text-xl text-slate-200 mb-10 font-light max-w-2xl mx-auto leading-relaxed">
+                A distinguished Catholic institution run by the Satna Diocesan Society. Nurturing the leaders of tomorrow in Maihar, Madhya Pradesh.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-5 justify-center">
+                <a href="#academics" class="px-8 py-4 bg-yellow-600 text-white font-bold uppercase tracking-widest text-xs hover:bg-yellow-700 transition shadow-lg">
+                    Admissions 2025-26
+                </a>
+                <a href="#about" class="px-8 py-4 bg-transparent border border-white text-white font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-slate-900 transition">
+                    Discover More
+                </a>
+            </div>
+        </div>
+        
+        <!-- Bottom Stats Strip -->
+        <div class="absolute bottom-0 w-full bg-slate-900/90 backdrop-blur border-t border-slate-800 py-6 hidden md:block">
+            <div class="max-w-7xl mx-auto px-4 flex justify-around text-center text-slate-400">
+                <div>
+                    <div class="text-2xl font-serif text-white">1982</div>
+                    <div class="text-[10px] uppercase tracking-widest">Founded</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-serif text-white">CBSE</div>
+                    <div class="text-[10px] uppercase tracking-widest">Affiliation</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-serif text-white">K-12</div>
+                    <div class="text-[10px] uppercase tracking-widest">Grades</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-serif text-white">Co-Ed</div>
+                    <div class="text-[10px] uppercase tracking-widest">Institute</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WELCOME / ABOUT SECTION -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-yellow-600 z-0"></div>
+                    <img 
+                        src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/about.jpg" 
+                        alt="School Campus" 
+                        class="relative z-10 shadow-2xl grayscale hover:grayscale-0 transition duration-700 ease-in-out w-full object-cover h-[500px]"
+                        onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'"
+                    >
+                    <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-slate-900 z-0"></div>
+                </div>
+                
+                <div>
+                    <h4 class="text-yellow-600 font-bold text-xs uppercase tracking-widest mb-2">About The School</h4>
+                    <h2 class="text-4xl text-slate-900 font-bold mb-6">A Legacy of Integral Development</h2>
+                    <p class="text-slate-600 mb-6 text-lg leading-relaxed font-light">
+                        Santhome Higher Secondary School is more than just an educational institution; it is a community grounded in faith and dedicated to academic rigor. Managed by the <strong>Satna Diocesan Society</strong> in collaboration with the Sisters of The Daughters of St. Thomas.
+                    </p>
+                    <p class="text-slate-600 mb-8 leading-relaxed">
+                        We are committed to the integral development of our students, fostering intellectual growth alongside moral and spiritual maturity.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="border-l-2 border-slate-200 pl-4">
+                            <div class="text-3xl font-serif text-slate-900 mb-1">40+</div>
+                            <div class="text-xs uppercase text-slate-500 font-bold">Years of Excellence</div>
+                        </div>
+                        <div class="border-l-2 border-slate-200 pl-4">
+                            <div class="text-3xl font-serif text-slate-900 mb-1">100%</div>
+                            <div class="text-xs uppercase text-slate-500 font-bold">Academic Focus</div>
+                        </div>
+                    </div>
+
+                    <a href="#disclosure" class="text-slate-900 font-bold text-sm border-b-2 border-yellow-600 hover:text-yellow-600 transition pb-1 inline-block">
+                        Read Principal's Message <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACADEMICS & UPDATES (Split Layout) -->
+    <section id="academics" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-3 gap-12">
+                
+                <!-- Latest News Column -->
+                <div class="lg:col-span-1" id="notices">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-8 pb-4 border-b border-slate-200">
+                        Latest Updates
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- News Item 1 -->
+                        <div class="group bg-white p-6 shadow-sm hover:shadow-md transition border-l-4 border-yellow-600">
+                            <div class="text-xs text-slate-400 uppercase tracking-wider mb-2 font-bold">Oct 15, 2025</div>
+                            <h4 class="text-lg font-serif text-slate-900 group-hover:text-yellow-700 transition mb-2">Book List 2025-26 Released</h4>
+                            <p class="text-sm text-slate-600 mb-4 line-clamp-2">The complete list of prescribed textbooks for all classes for the upcoming academic session is now available.</p>
+                            <a href="#" class="text-xs font-bold text-slate-900 uppercase tracking-widest border-b border-slate-300 pb-1">Download PDF</a>
+                        </div>
+
+                        <!-- News Item 2 -->
+                        <div class="group bg-white p-6 shadow-sm hover:shadow-md transition border-l-4 border-slate-300">
+                            <div class="text-xs text-slate-400 uppercase tracking-wider mb-2 font-bold">Sep 02, 2025</div>
+                            <h4 class="text-lg font-serif text-slate-900 group-hover:text-yellow-700 transition mb-2">Admissions Open (Nursery-XI)</h4>
+                            <p class="text-sm text-slate-600 mb-4 line-clamp-2">Applications are invited for the academic year 2025-26. Visit the school office for forms.</p>
+                            <a href="#" class="text-xs font-bold text-slate-900 uppercase tracking-widest border-b border-slate-300 pb-1">View Details</a>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-right">
+                        <a href="#" class="text-sm font-bold text-slate-600 hover:text-slate-900">View Archives <i class="fas fa-chevron-right text-xs ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Academic Downloads & Calendar -->
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-8 pb-4 border-b border-slate-200">
+                        Academic Corner
+                    </h3>
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <a href="#" class="group relative overflow-hidden h-64 bg-slate-900 flex items-end p-6">
+                            <img 
+                                src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/calendar.jpg"
+                                class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-30 transition transform group-hover:scale-105 duration-700"
+                                onerror="this.src='https://images.unsplash.com/photo-1506784983877-45594efa4cbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'"
+                            >
+                            <div class="relative z-10">
+                                <div class="w-10 h-10 bg-yellow-600 text-white flex items-center justify-center mb-3">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <h4 class="text-xl text-white font-bold mb-1">Academic Calendar</h4>
+                                <p class="text-slate-300 text-sm">Schedule for 2025-26</p>
+                            </div>
+                        </a>
+
+                        <a href="#" class="group relative overflow-hidden h-64 bg-slate-900 flex items-end p-6">
+                            <img 
+                                src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/library.jpg"
+                                class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-30 transition transform group-hover:scale-105 duration-700"
+                                onerror="this.src='https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'"
+                            >
+                            <div class="relative z-10">
+                                <div class="w-10 h-10 bg-slate-700 text-white flex items-center justify-center mb-3">
+                                    <i class="fas fa-book-reader"></i>
+                                </div>
+                                <h4 class="text-xl text-white font-bold mb-1">Syllabus & Curriculum</h4>
+                                <p class="text-slate-300 text-sm">Download Course Structures</p>
+                            </div>
+                        </a>
+                        
+                        <!-- Quick Links List -->
+                        <div class="sm:col-span-2 bg-white p-8 border border-slate-200">
+                            <h4 class="font-serif text-lg text-slate-900 mb-4">Quick Resources</h4>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <a href="#" class="flex items-center text-slate-600 hover:text-yellow-700 transition">
+                                    <i class="fas fa-file-pdf w-6 text-red-500"></i>
+                                    <span>Download Transfer Certificate (TC)</span>
+                                </a>
+                                <a href="#" class="flex items-center text-slate-600 hover:text-yellow-700 transition">
+                                    <i class="fas fa-file-pdf w-6 text-red-500"></i>
+                                    <span>School Management Committee</span>
+                                </a>
+                                <a href="#" class="flex items-center text-slate-600 hover:text-yellow-700 transition">
+                                    <i class="fas fa-file-pdf w-6 text-red-500"></i>
+                                    <span>Fee Structure 2025-26</span>
+                                </a>
+                                <a href="#" class="flex items-center text-slate-600 hover:text-yellow-700 transition">
+                                    <i class="fas fa-file-pdf w-6 text-red-500"></i>
+                                    <span>Annual Report</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FACILITIES: Clean Grid -->
+    <section id="facilities" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
+            <h4 class="text-yellow-600 font-bold text-xs uppercase tracking-widest mb-2">Campus Life</h4>
+            <h2 class="text-4xl text-slate-900 font-bold">World-Class Infrastructure</h2>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-200 border border-slate-200">
+            <!-- Facility Item -->
+            <div class="bg-white p-10 text-center group hover:bg-slate-50 transition cursor-default">
+                <i class="fas fa-book text-4xl text-slate-300 group-hover:text-yellow-600 transition mb-4 facility-icon duration-300"></i>
+                <h3 class="font-serif text-lg text-slate-900 mb-2">Library</h3>
+                <p class="text-xs text-slate-500 uppercase tracking-wider">Extensive Collection</p>
+            </div>
+            
+            <div class="bg-white p-10 text-center group hover:bg-slate-50 transition cursor-default">
+                <i class="fas fa-flask text-4xl text-slate-300 group-hover:text-yellow-600 transition mb-4 facility-icon duration-300"></i>
+                <h3 class="font-serif text-lg text-slate-900 mb-2">Science Labs</h3>
+                <p class="text-xs text-slate-500 uppercase tracking-wider">Modern Equipment</p>
+            </div>
+            
+            <div class="bg-white p-10 text-center group hover:bg-slate-50 transition cursor-default">
+                <i class="fas fa-desktop text-4xl text-slate-300 group-hover:text-yellow-600 transition mb-4 facility-icon duration-300"></i>
+                <h3 class="font-serif text-lg text-slate-900 mb-2">Computer Centre</h3>
+                <p class="text-xs text-slate-500 uppercase tracking-wider">High-Speed Access</p>
+            </div>
+            
+            <div class="bg-white p-10 text-center group hover:bg-slate-50 transition cursor-default">
+                <i class="fas fa-basketball-ball text-4xl text-slate-300 group-hover:text-yellow-600 transition mb-4 facility-icon duration-300"></i>
+                <h3 class="font-serif text-lg text-slate-900 mb-2">Sports Complex</h3>
+                <p class="text-xs text-slate-500 uppercase tracking-wider">Holistic Growth</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION & MAP SECTION -->
+    <section id="contact" class="bg-slate-50 py-20 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h4 class="text-yellow-600 font-bold text-xs uppercase tracking-widest mb-2">Visit Us</h4>
+                <h2 class="text-3xl text-slate-900 font-bold font-serif">Campus Location</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-5 gap-8 bg-white shadow-xl rounded-lg overflow-hidden border border-slate-100">
+                <!-- Contact Details -->
+                <div class="md:col-span-2 p-10 bg-slate-900 text-white flex flex-col justify-center">
+                    <h3 class="text-2xl font-serif mb-6">Get in Touch</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1.5 mr-4 text-yellow-600 text-lg"></i>
+                            <div>
+                                <h5 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Address</h5>
+                                <p class="text-slate-200 leading-relaxed">Santhome Higher Secondary School,<br>Maihar, Satna District,<br>Madhya Pradesh - 485771</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1.5 mr-4 text-yellow-600 text-lg"></i>
+                            <div>
+                                <h5 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Phone</h5>
+                                <p class="text-slate-200">07674 – 232453</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope mt-1.5 mr-4 text-yellow-600 text-lg"></i>
+                            <div>
+                                <h5 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Email</h5>
+                                <p class="text-slate-200">santhomeschoolmaihar@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <i class="fas fa-clock mt-1.5 mr-4 text-yellow-600 text-lg"></i>
+                            <div>
+                                <h5 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Office Hours</h5>
+                                <p class="text-slate-200">08:00 AM – 02:00 PM<br><span class="text-slate-500 text-xs">(Closed on Sundays)</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Map Embed -->
+                <div class="md:col-span-3 h-80 md:h-auto relative bg-slate-200">
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; filter: grayscale(10%) contrast(90%);" 
+                        loading="lazy" 
+                        allowfullscreen 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://maps.google.com/maps?q=24.27808,80.763497&z=15&output=embed">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MANDATORY DISCLOSURE (Governance Style) -->
+    <section id="disclosure" class="py-20 bg-slate-900 text-white scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-slate-700 pb-6">
+                <div>
+                    <h4 class="text-yellow-500 font-bold text-xs uppercase tracking-widest mb-2">Transparency</h4>
+                    <h2 class="text-3xl font-bold">Mandatory Public Disclosure</h2>
+                </div>
+                <div class="text-slate-400 text-sm mt-4 md:mt-0">
+                    Appendix IX Compliance
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-serif text-white mb-6">General Information</h3>
+                    <div class="bg-slate-800 p-6 border border-slate-700">
+                        <table class="w-full text-sm text-left text-slate-300">
+                            <tbody class="divide-y divide-slate-700">
+                                <tr>
+                                    <td class="py-3 font-semibold text-white">Name</td>
+                                    <td class="py-3">Santhome Higher Secondary School</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 font-semibold text-white">Affiliation No.</td>
+                                    <td class="py-3">1031039</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 font-semibold text-white">Region</td>
+                                    <td class="py-3">Maihar, Satna (M.P.)</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 font-semibold text-white">Principal</td>
+                                    <td class="py-3">Principal In-Charge</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-serif text-white mb-6">Documents Repository</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <a href="#" class="flex items-center p-4 bg-slate-800 border border-slate-700 hover:bg-slate-700 hover:border-yellow-600 transition group">
+                            <i class="fas fa-file-contract text-2xl text-slate-500 group-hover:text-yellow-500 mr-3"></i>
+                            <span class="text-sm font-medium text-slate-300 group-hover:text-white">Affiliation Letter</span>
+                        </a>
+                        <a href="#" class="flex items-center p-4 bg-slate-800 border border-slate-700 hover:bg-slate-700 hover:border-yellow-600 transition group">
+                            <i class="fas fa-building text-2xl text-slate-500 group-hover:text-yellow-500 mr-3"></i>
+                            <span class="text-sm font-medium text-slate-300 group-hover:text-white">Society Registration</span>
+                        </a>
+                        <a href="#" class="flex items-center p-4 bg-slate-800 border border-slate-700 hover:bg-slate-700 hover:border-yellow-600 transition group">
+                            <i class="fas fa-shield-alt text-2xl text-slate-500 group-hover:text-yellow-500 mr-3"></i>
+                            <span class="text-sm font-medium text-slate-300 group-hover:text-white">Safety Certificates</span>
+                        </a>
+                        <a href="#" class="flex items-center p-4 bg-slate-800 border border-slate-700 hover:bg-slate-700 hover:border-yellow-600 transition group">
+                            <i class="fas fa-users text-2xl text-slate-500 group-hover:text-yellow-500 mr-3"></i>
+                            <span class="text-sm font-medium text-slate-300 group-hover:text-white">SMC Member List</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER: Extensive & Official -->
+    <footer class="bg-black text-slate-400 py-16 border-t border-slate-900 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                         <!-- Footer Logo Logic -->
+                        <img 
+                            src="https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/STHS-Logo.png" 
+                            alt="Santhome Logo" 
+                            class="h-14 w-auto bg-white p-1 rounded-full shadow-lg"
+                            onerror="this.style.display='none'; document.getElementById('footer-logo-fallback').classList.remove('hidden');"
+                        >
+                        <!-- Fallback Icon for Footer -->
+                        <div id="footer-logo-fallback" class="hidden h-12 w-12 bg-slate-800 rounded-full flex items-center justify-center border border-yellow-600">
+                             <i class="fas fa-graduation-cap text-xl text-yellow-500"></i>
+                        </div>
+
+                        <span class="text-2xl font-serif text-white font-bold">Santhome</span>
+                    </div>
+                    <p class="leading-relaxed mb-6 max-w-sm">
+                        Dedicated to the pursuit of excellence in education, character formation, and service to the nation.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-yellow-600 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-yellow-600 hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-yellow-600 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-widest mb-6">Contact</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-yellow-600"></i>
+                            <span>Maihar, Satna District,<br>Madhya Pradesh, India</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-yellow-600"></i>
+                            <span>07674 – 232453</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-yellow-600"></i>
+                            <span>santhomeschoolmaihar@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-widest mb-6">Information</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white transition">Admissions Process</a></li>
+                        <li><a href="#" class="hover:text-white transition">Fee Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Transfer Certificates</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center text-xs uppercase tracking-widest text-slate-600">
+                <p>&copy; 2025 Santhome Higher Secondary School. All Rights Reserved.</p>
+                <p class="mt-2 md:mt-0">Affiliation No: 1031039</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-md', 'py-0');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = menuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        // Mobile Accordion Logic
+        document.querySelectorAll('.mobile-accordion-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const submenu = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                // Close other open submenus (optional, clean UX)
+                document.querySelectorAll('.mobile-submenu').forEach(otherSub => {
+                    if(otherSub !== submenu) {
+                        otherSub.classList.remove('open');
+                        otherSub.previousElementSibling.querySelector('i').classList.remove('fa-chevron-up');
+                        otherSub.previousElementSibling.querySelector('i').classList.add('fa-chevron-down');
+                    }
+                });
+
+                // Toggle current
+                submenu.classList.toggle('open');
+                
+                // Toggle Icon
+                if (submenu.classList.contains('open')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+        
+        // Link click close menu
+        document.querySelectorAll('#mobile-menu a:not(.mobile-accordion-toggle)').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuBtn.querySelector('i').classList.remove('fa-times');
+                menuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+        
+        // Mock download
+        document.querySelectorAll('a[href="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Prevent default only if it's meant to be a download link interaction simulation
+                if (link.textContent.toLowerCase().includes('pdf') || link.textContent.toLowerCase().includes('download')) {
+                   e.preventDefault();
+                   alert('Document download simulation.');
+                }
+            });
+        });
+
+        // Dynamic Hero Image Fallback Script
+        // This ensures that if the GitHub image fails (404), we revert to Unsplash for the CSS background
+        const heroImage = new Image();
+        heroImage.src = 'https://raw.githubusercontent.com/rudhm/santhomeschool/main/Frontend/images/slider/1.jpg';
+        heroImage.onerror = function() {
+            document.documentElement.style.setProperty('--hero-image', "url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')");
+        };
+    </script>
+</body>
+</html>
